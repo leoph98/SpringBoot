@@ -1,0 +1,32 @@
+package com.example.progweb.Progweb.config;
+
+import java.util.Arrays;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.stereotype.Component;
+
+import com.example.progweb.Progweb.entities.User;
+import com.example.progweb.Progweb.repositories.UserRepository;
+
+@Component
+public class TestConfig implements CommandLineRunner {
+	
+	@Autowired
+	private UserRepository userRepository;
+	
+	public void run(String... args) throws Exception {
+		// TODO Auto-generated method stub
+		User u1 = new User(null, "Maria Brown", "maria@gmail.com", (long) 98888888, "123456");
+		User u2 = new User(null, "Alex Green", "alex@gmail.com", (long) 97777777, "123456");
+		User u3 = new User(null, "Leonardo PH", "leo@gmail.com", (long) 7788797, "123456");
+		User u4 = new User(null, "joao Green", "green@gmail.com", (long) 548978978, "123456");
+		User u5 = new User(null, "jose Green", "jose@gmail.com", (long) 231415152, "123456");
+		User u6 = new User(null, "Alex ruan", "alex@gmail.com", (long) 879659658, "123456");
+		User u7 = new User(null, "Alex matian", "matian@gmail.com", (long) 7567533, "123456");
+		User u8 = new User(null, "Alex rose", "rose@gmail.com", (long) 998800000, "123456");
+		User u9 = new User(null, "karol duarte", "karol@gmail.com", (long) 4434255, "123456");
+		User u10 = new User(null, "Alex Green", "joao@gmail.com", (long) 555555000, "123456");
+		userRepository.saveAll(Arrays.asList(u1, u2, u3, u4, u5, u6, u7, u8, u9, u10));
+	}
+}

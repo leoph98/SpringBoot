@@ -1,0 +1,52 @@
+package services;
+
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.stereotype.Service;
+
+import com.example.progweb.entities.User;
+import com.example.progweb.exceptions.ResourceNotFoundException;
+import com.example.progweb.repositories.UserRepository;
+
+@Service
+public interface UserService {
+	
+	@Autowired
+	public static final UserRepository userRepository = null;
+	
+	//FindAll
+	public List<User> findAll();
+
+	//public Object findById(Long id);
+	public static User findById(Long userId) {
+        Optional<User> user = userRepository.findById(userId);
+        if (user.isPresent()) {
+            return user.get();
+        } else {
+            throw new ResourceNotFoundException("Usuário não encontrado com o ID: " + userId);
+        }
+    }
+	
+	//Insert
+	public User save(User user);
+	
+	//Delete
+	public void deleteById(Long userId);
+	
+	
+	//Delete
+	//public void deleteById(Long userId);
+	 public static void delete(Long userId) {
+	        try {
+	            userRepository.deleteById(userId);
+	        } catch (EmptyResultDataAccessException e) {
+	            throw new ResourceNotFoundException("Usuário não encontrado com o ID: " + userId);
+	        }
+	    }
+
+	public boolean existsById(Long userId);
+  
+}

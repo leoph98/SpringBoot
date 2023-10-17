@@ -1,0 +1,62 @@
+package resource;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import  org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import entities.User;
+import services.UserService;
+
+@RestController
+@RequestMapping(value = "/users")
+public class UserResource {
+	
+	@Autowired
+	private UserService service;
+	
+	//FindAll
+	@GetMapping("/users")
+	public List<User> findAll(){
+		List<User> result = service.findAll();
+		return result;
+	}
+	
+	//findByld
+	@GetMapping(value = "/{id}")
+	public User findById(@PathVariable Long id){
+		User result = (User) UserService.findById(id);
+		return result;
+	}	
+	
+	//Insert
+	public User createUser(User user) {
+		User result = service.save(user);
+		return result;
+    }
+	
+	//Delete
+	public void deleteUserById(Long userId) {
+        if (service.existsById(userId)) {
+        	service.deleteById(userId);
+        }
+    }
+	
+	
+	//Update
+	public User updateUser(Long userId, User updatedUser) {
+        if (service.existsById(userId)) {
+            User existingUser = (User) UserService.findById(userId);
+            
+            existingUser.setNome(updatedUser.getNome());
+            existingUser.setEmail(updatedUser.getEmail());
+
+            return service.save(existingUser);
+        }
+        return null; 
+    }
+
+}

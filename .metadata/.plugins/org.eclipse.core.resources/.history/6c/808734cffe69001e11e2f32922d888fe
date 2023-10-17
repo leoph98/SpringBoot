@@ -1,0 +1,33 @@
+package com.example.progweb.Progweb.services;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.example.progweb.Progweb.entities.User;
+
+
+@Service
+public interface UserService {
+	
+	@Autowired
+	private UserRepository userRepository = null;
+		
+	//FindAll
+	public List<User> findAll();
+
+	//public Object findById(Long id);
+	public default User findById(Long userId) {
+		return null;
+	}
+	
+	//Insert
+	public User save(User user);
+	
+	//Delete
+	public void deleteById(Long userId);
+
+	public boolean existsById(Long userId);
+  
+}
